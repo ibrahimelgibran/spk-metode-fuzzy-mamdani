@@ -1,66 +1,75 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Alternatif_model extends CI_Model
-{	
 
-	private $tb_alternatif='alternatif';
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Alternatif_model extends CI_Model
+{
+    public $table = 'alternatif';
+    public $id = 'id';
+    public $order = 'DESC';
+
     function __construct()
     {
-         $this->load->library('M_db');
+        parent::__construct();
+    }
+
+    // get all data
+    function get_all()
+    {
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table)->result();
+    }
+
+    // get data by id
+    function get_by_id($id)
+    {
+        $this->db->where($this->id, $id);
+        return $this->db->get($this->table)->row();
     }
     
+    // get total rows
+    function total_rows($q = NULL) {
+        $this->db->like('nama_alternatif', $q);
+        $this->db->or_like('harga', $q);
+        $this->db->or_like('merk', $q);
+        $this->db->or_like('garansi', $q);
+        $this->db->or_like('keahlianaa', $q);
+        $this->db->or_like('tingkat_kebutuhan', $q);
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
 
-	
-	function alternatif_add($id_sekolah,$kriteriaData=array(), $sub=array())
-	{
-        if($this->m_db->is_bof('sekolah')==FALSE)
-        {
-        	if(!empty($kriteriaData))
-        	{
-				$d=array(
-				'id_sekolah'=>$id_sekolah,
-				);
-				if($this->m_db->add_row('alternatif',$d)==TRUE)
-				{
-					$alternatifID=$this->m_db->last_insert_id();
-					foreach($kriteriaData as $rK=>$rV)
-					{
-						$d2=array(
-						'id_alternatif'=>$alternatifID,
-						'id_kriteria'=>$rK,
-						'id_subkriteria'=>$rV,
-						'id_nilai'=>$rV,
-						);
-						$this->m_db->add_row('alternatif_nilai',$d2);
-					}
-					redirect('Alternatif','refresh');
-				}else{
-					//echo "GAGAL TAMBAH PESERTA";
-					return false;
-				}
-			}else{
-				//echo "DATA KRITERIA TAK ADA";
-				return false;
-			}		
-		}else{
-			//echo "SISWA TIDAK ADA";
-			return false;
-		}
-	}
+    // get data with limit and search
+    function get_limit_data($limit, $start = 0, $q = NULL) {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->like('nama_alternatif', $q);
+        $this->db->or_like('harga', $q);
+        $this->db->or_like('merk', $q);
+        $this->db->or_like('garansi', $q);
+        $this->db->or_like('keahlianaa', $q);
+        $this->db->or_like('tingkat_kebutuhan', $q);
+        $this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
 
-	function alternatif_delete($id_alternatif)
-	{
-		$s=array(
-		'id_alternatif'=>$id_alternatif,
-		);
-		if($this->m_db->delete_row($this->tb_alternatif,$s)==TRUE)
-		{
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
+    // insert data
+    function insert($data)
+    {
+        $this->db->insert($this->table, $data);
+    }
 
+    // update data
+    function update($id, $data)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table, $data);
+    }
 
+    // delete data
+    function delete($id)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->delete($this->table);
+    }
 }
