@@ -25,37 +25,49 @@
             <?= anchor('admin/Dashboard', '<i class="entypo-gauge"></i><span>Dashboard</span>'); ?>
         </li>
 
+         <li <?= ($pag == "Kriteria") ? 'class="active opened active"' : ''; ?>>
+                    <?= anchor('Kriteria', '<span class="entypo-layout">Kriteria</span>'); ?>
+                </li>
+
         <!-- Kriteria -->
-        <li <?= ($pag == "Kriteria" || $pag == "Subkriteria") ? 'class="active opened active multiple-expanded"' : ''; ?>>
+        <!-- <li <?= ($pag == "Kriteria" || $pag == "Subkriteria") ? 'class="active opened active multiple-expanded"' : ''; ?>>
             <a href="#">
                 <i class="entypo-layout"></i>
                 <span>Kriteria</span>
             </a>
             <ul>
-                <li <?= ($pag == "Kriteria") ? 'class="active opened active"' : ''; ?>>
-                    <?= anchor('Kriteria', '<span class="entypo-layout">Kriteria</span>'); ?>
-                </li>
+               
                 <li <?= ($pag == "Subkriteria") ? 'class="active opened active"' : ''; ?>>
                     <?= anchor('Subkriteria', '<span class="entypo-menu">Subkriteria</span>'); ?>
                 </li>
             </ul>
-        </li>
+        </li> -->
 
         <!-- Alat dan Bahan -->
         <li <?= ($pag == "sekolah") ? 'class="active opened active"' : ''; ?>>
             <?= anchor('Sekolah', '<i class="entypo-doc-text"></i><span>Alat dan Bahan</span>'); ?>
         </li>
 
+        <li <?= ($pag == "Penilaian") ? 'class="active opened active"' : ''; ?>>
+                    <?= anchor('Alternatif', '<span class="entypo-direction">Penilaian</span>'); ?>
+                </li>
+
+                <li <?= ($pag == "Penilaian") ? 'class="active opened active"' : ''; ?>>
+                    <?= anchor('Alternatif', '<span class="entypo-chart-bar">Hasil Perhitungan</span>'); ?>
+                </li>
+
+                  <li <?= ($pag == "Penilaian") ? 'class="active opened active"' : ''; ?>>
+                    <?= anchor('Alternatif', '<span class="entypo-chart-bar">Riwayat</span>'); ?>
+                </li>
+
         <!-- Perhitungan -->
-        <li <?= ($pag == "Alternatif" || $page == "Banding" || $page == "Hasil") ? 'class="active opened active multiple-expanded"' : ''; ?>>
+        <!-- <li <?= ($pag == "Alternatif" || $page == "Banding" || $page == "Hasil") ? 'class="active opened active multiple-expanded"' : ''; ?>>
             <a href="#">
                 <i class="entypo-book"></i>
                 <span>Perhitungan</span>
             </a>
             <ul>
-                <li <?= ($pag == "Penilaian") ? 'class="active opened active"' : ''; ?>>
-                    <?= anchor('Alternatif', '<span class="entypo-direction">Alternatif</span>'); ?>
-                </li>
+                
                 <li <?= ($page == "Banding") ? 'class="active opened active"' : ''; ?>>
                     <?= anchor('Perbandingan/banding', '<span class="entypo-switch">Perbandingan</span>'); ?>
                 </li>
@@ -63,7 +75,7 @@
                     <?= anchor('Perbandingan/hasil', '<span class="entypo-chart-bar">Hasil Perhitungan</span>'); ?>
                 </li>
             </ul>
-        </li>
+        </li> -->
 
         <!-- Pengaturan -->
         <li <?= ($page == "Auth") ? 'class="active opened active multiple-expanded"' : ''; ?>>
