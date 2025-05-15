@@ -15,7 +15,8 @@ class Subkriteria extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('ion_auth');
         $this->load->library('m_db');
-        $this->load->library('pagination'); // Load library pagination
+        
+        $this->pagination = $this->load->library('pagination');
         ceklogin();
     }
 
@@ -47,7 +48,9 @@ class Subkriteria extends CI_Controller
             'attributes' => ['class' => 'page-link']
         ];
 
-        $this->pagination->initialize($config);
+$this->pagination->initialize($config);
+$data['pagination'] = $this->pagination->create_links();
+
 
         $data = [
             'record' => $this->Subkriteria_model->index()->result(),
